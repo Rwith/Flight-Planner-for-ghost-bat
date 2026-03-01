@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghost Bat Flight Planner</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Leaflet.Draw -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+
+  <!-- Turf.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header>
+    <span class="logo">&#9992;</span>
+    <h1>Ghost Bat Flight Planner</h1>
+    <span class="subtitle">MQ-28A RC Mission Planning</span>
+  </header>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+      <!-- Tab buttons -->
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="waypoints">Waypoints</button>
+        <button class="tab-btn" data-tab="geofence">Geofence</button>
+        <button class="tab-btn" data-tab="battery">Battery</button>
+      </div>
+
+      <!-- Waypoints tab -->
+      <div class="tab-panel active" id="tab-waypoints">
+        <div class="panel-header">
+          <span>Click the map to place waypoints</span>
+          <button id="clear-waypoints-btn" class="btn btn-danger btn-sm">Clear All</button>
+        </div>
+        <div class="distance-display">
+          Total distance: <strong id="total-distance">0.00 km</strong>
+        </div>
+        <ul id="waypoint-list" class="waypoint-list">
+          <li class="empty-msg">No waypoints yet</li>
+        </ul>
+      </div>
+
+      <!-- Geofence tab -->
+      <div class="tab-panel" id="tab-geofence">
+        <div class="panel-header">
+          <span>Define a safe flying zone</span>
+        </div>
+        <div class="geofence-controls">
+          <button id="draw-geofence-btn" class="btn btn-primary">Draw Zone</button>
+          <button id="clear-geofence-btn" class="btn btn-danger">Clear Zone</button>
+        </div>
+        <div id="geofence-status" class="status-badge status-none">No geofence defined</div>
+        <ul id="violation-list" class="violation-list"></ul>
+      </div>
+
+      <!-- Battery tab -->
+      <div class="tab-panel" id="tab-battery">
+        <div class="panel-header">
+          <span>Endurance Calculator</span>
+        </div>
+        <div class="battery-form">
+          <label>
+            Capacity (mAh)
+            <input type="number" id="bat-capacity" min="0" step="100" placeholder="e.g. 5000">
+          </label>
+          <label>
+            Voltage (V)
+            <input type="number" id="bat-voltage" min="0" step="0.1" placeholder="e.g. 22.2">
+          </label>
+          <label>
+            Avg Current Draw (A)
+            <input type="number" id="bat-current" min="0" step="0.5" placeholder="e.g. 30">
+          </label>
+          <p class="safety-note">Uses 80% usable capacity (safe margin)</p>
+          <div id="battery-error" class="error-msg" hidden></div>
+        </div>
+        <div class="battery-result" id="battery-result">
+          <div class="result-row">
+            <span>Flight time</span>
+            <strong id="flight-time">—</strong>
+          </div>
+          <div class="result-row">
+            <span>Energy (Wh)</span>
+            <strong id="watt-hours">—</strong>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/waypoints.js"></script>
+  <script src="js/geofence.js"></script>
+  <script src="js/battery.js"></script>
+</body>
+</html>

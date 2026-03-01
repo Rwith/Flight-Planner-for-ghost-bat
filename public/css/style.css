@@ -409,6 +409,29 @@ body {
   font-size: 14px;
 }
 
+/* ── Map waypoint markers ─────────────────────────────────── */
+.wp-marker {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent2);
+  border: 2px solid var(--accent);
+  color: #000;
+  font-weight: 700;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.55);
+  cursor: default;
+}
+
+.wp-marker.outside {
+  background: var(--danger);
+  border-color: #ff6b6b;
+  color: #fff;
+}
+
 /* ── Map ──────────────────────────────────────────────────── */
 #map {
   flex: 1;

@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGeofence();
   initBattery();
   initTabs();
+  initWind();
 });
 
 // ── Map initialisation ────────────────────────────────────────────────────────

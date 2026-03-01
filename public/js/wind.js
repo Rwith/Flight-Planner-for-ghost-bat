@@ -102,6 +102,9 @@ async function fetchAndDisplayWind() {
 
     _windLayer.addTo(FlightPlanner.map);
 
+    // Push centre-grid wind into the groundspeed inputs and recalculate
+    _syncWindInputs(results);
+
     // Schedule next automatic refresh
     clearTimeout(_windTimer);
     _windTimer = setTimeout(fetchAndDisplayWind, WIND_REFRESH_MS);
@@ -109,4 +112,22 @@ async function fetchAndDisplayWind() {
   } catch (err) {
     console.warn('Wind data fetch failed:', err);
   }
+}
+
+// Sync the centre-grid wind values into the speed/direction inputs so the
+// groundspeed calculation uses live data without any manual entry.
+function _syncWindInputs(results) {
+  const centre = results[Math.floor(results.length / 2)];
+  if (!centre?.current) return;
+
+  const speedKph = (centre.current.wind_speed_10m    ?? 0) * 3.6; // m/s → km/h
+  const dir       =  centre.current.wind_direction_10m ?? 0;
+
+  const speedEl = document.getElementById('wind-speed');
+  const dirEl   = document.getElementById('wind-dir');
+  if (speedEl) speedEl.value = Math.round(speedKph);
+  if (dirEl)   dirEl.value   = Math.round(dir);
+
+  renderWaypointList();
+  updateMissionEstTime();
 }

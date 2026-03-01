@@ -110,14 +110,14 @@
               <input type="number" id="mission-speed" min="1" step="10" placeholder="e.g. 200">
             </label>
             <label>
-              Wind Speed (km/h)
-              <input type="number" id="wind-speed" min="0" step="5" placeholder="e.g. 0">
+              Wind Speed (km/h) — live
+              <input type="number" id="wind-speed" min="0" step="5" placeholder="fetching…" readonly>
             </label>
             <label>
-              Wind From (° · 0=N 90=E 180=S 270=W)
-              <input type="number" id="wind-dir" min="0" max="359" step="5" placeholder="e.g. 270">
+              Wind From (° · 0=N 90=E 180=S 270=W) — live
+              <input type="number" id="wind-dir" min="0" max="359" step="5" placeholder="fetching…" readonly>
             </label>
-            <p class="safety-note">Wind affects groundspeed per leg (see Waypoints tab)</p>
+            <p class="safety-note">Auto-updated from live wind data — affects groundspeed per leg</p>
           </div>
         </div>
       </div>

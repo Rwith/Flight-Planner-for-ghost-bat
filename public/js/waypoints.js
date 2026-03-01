@@ -136,9 +136,7 @@ function updateMissionEstTime() {
     totalTime_s    += (slantDist / 1000) / gs * 3600;
   }
 
-  const mins = Math.floor(totalTime_s / 60);
-  const secs = Math.round(totalTime_s % 60);
-  el.textContent = `${mins}m ${String(secs).padStart(2, '0')}s`;
+  el.textContent = formatDuration(totalTime_s);
 }
 
 // ── Sidebar list rendering ────────────────────────────────────────────────────
@@ -189,9 +187,7 @@ function renderWaypointList() {
         const bearing = calcBearing(wp.latlng, nextWp.latlng);
         const gs      = calcLegGroundspeed(bearing, airspeed, windSpeed, windDir);
         const time_s  = (slantDist / 1000) / gs * 3600;
-        const m       = Math.floor(time_s / 60);
-        const s       = Math.round(time_s % 60);
-        timeLabel     = ` ${m}m${String(s).padStart(2, '0')}s`;
+        timeLabel     = ` ${formatDuration(time_s)}`;
       }
 
       legHtml = `<span class="wp-leg-info">→ WP${i + 2}: ${distLabel}${timeLabel}</span>`;
@@ -236,6 +232,15 @@ function calcBearing(latlng1, latlng2) {
 function calcLegGroundspeed(bearing_deg, airspeed_kmh, windSpeed_kmh, windDir_deg) {
   const angleDiff = (bearing_deg - windDir_deg) * Math.PI / 180;
   return Math.max(airspeed_kmh - windSpeed_kmh * Math.cos(angleDiff), 1);
+}
+
+// ── Duration formatter ────────────────────────────────────────────────────────
+function formatDuration(totalSeconds) {
+  const h    = Math.floor(totalSeconds / 3600);
+  const m    = Math.floor((totalSeconds % 3600) / 60);
+  const s    = Math.round(totalSeconds % 60);
+  if (h > 0) return `${h}h ${String(m).padStart(2, '0')}m`;
+  return `${m}m ${String(s).padStart(2, '0')}s`;
 }
 
 // ── Read mission performance inputs ──────────────────────────────────────────

@@ -114,9 +114,19 @@ function _bbParse(buffer) {
         break;
       }
       case 'CURR':
-      case 'BAT': {
-        const volt = fields['Volt'];
-        if (volt != null && isFinite(volt) && volt > 1) currPoints.push(volt);
+      case 'BAT':
+      case 'BATT': {
+        // Label is 'Volt' in most versions; fall back to any Volt*/Voltage key
+        let volt = fields['Volt'];
+        if (volt == null) {
+          const vk = Object.keys(fields).find(k => /^Volt|^Voltage/i.test(k));
+          if (vk) volt = fields[vk];
+        }
+        if (volt != null && isFinite(volt)) {
+          // Older ArduPilot stores voltage as int16 centivolts (e.g. 1234 = 12.34 V)
+          if (volt > 100) volt /= 100;
+          if (volt > 2) currPoints.push(volt);
+        }
         break;
       }
       case 'MODE': {

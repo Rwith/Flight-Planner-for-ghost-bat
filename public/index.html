@@ -40,6 +40,7 @@
         <button class="tab-btn active" data-tab="waypoints">Waypoints</button>
         <button class="tab-btn" data-tab="geofence">Geofence</button>
         <button class="tab-btn" data-tab="battery">Battery</button>
+        <button class="tab-btn" data-tab="blackbox">Blackbox</button>
       </div>
 
       <!-- Waypoints tab -->
@@ -122,6 +123,36 @@
         </div>
       </div>
 
+      <!-- Blackbox tab -->
+      <div class="tab-panel" id="tab-blackbox">
+        <div class="panel-header">
+          <span>ArduPilot Log Decoder</span>
+          <button id="bb-clear-btn" class="btn btn-danger btn-sm">Clear</button>
+        </div>
+
+        <div class="bb-scroll">
+          <!-- Drop zone / file picker -->
+          <div id="bb-drop" class="bb-drop">
+            <div class="bb-drop-icon">&#128196;</div>
+            <div class="bb-drop-label">Drop .bin log here or</div>
+            <label class="btn btn-primary btn-sm bb-file-label">
+              Browse
+              <input type="file" id="bb-file" accept=".bin" hidden>
+            </label>
+          </div>
+
+          <!-- Status line -->
+          <div id="bb-status" class="bb-status">No log loaded</div>
+
+          <!-- Stats -->
+          <div id="bb-stats" class="bb-stats"></div>
+
+          <p class="safety-note" style="padding:0 12px 10px;">
+            Overlays GPS track on map &middot; ArduPilot DataFlash .bin format
+          </p>
+        </div>
+      </div>
+
     </aside>
 
     <!-- Map -->
@@ -134,5 +165,6 @@
   <script src="js/geofence.js"></script>
   <script src="js/battery.js"></script>
   <script src="js/wind.js"></script>
+  <script src="js/blackbox.js"></script>
 </body>
 </html>

@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initBattery();
   initTabs();
   initWind();
+  initBlackbox();
 });
 
 // ── Map initialisation ────────────────────────────────────────────────────────

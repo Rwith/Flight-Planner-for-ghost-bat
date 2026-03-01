@@ -182,13 +182,27 @@ body {
 
 .waypoint-item {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
   padding: 6px 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .waypoint-item:last-child { border-bottom: none; }
+
+.wp-row-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wp-row-bottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 30px;
+  flex-wrap: wrap;
+}
 
 .wp-num {
   width: 22px;
@@ -224,6 +238,44 @@ body {
 }
 
 .wp-remove:hover { background: var(--danger); color: #fff; }
+
+.wp-alt-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.wp-alt-input {
+  width: 60px;
+  padding: 2px 5px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text);
+  font-size: 11px;
+}
+
+.wp-alt-input:focus {
+  outline: none;
+  border-color: var(--accent2);
+}
+
+.wp-leg-info {
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.wp-alt-change {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.wp-alt-change.climb   { color: var(--accent); }
+.wp-alt-change.descent { color: var(--warn); }
 
 /* ── Geofence tab ─────────────────────────────────────────── */
 .geofence-controls {
@@ -266,6 +318,24 @@ body {
 .violation-list li:last-child { border-bottom: none; }
 
 /* ── Battery tab ──────────────────────────────────────────── */
+.battery-scroll {
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-divider {
+  padding: 8px 12px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
 .battery-form {
   padding: 10px 12px;
   display: flex;

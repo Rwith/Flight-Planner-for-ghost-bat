@@ -7,6 +7,14 @@ function initBattery() {
     document.getElementById(id).addEventListener('input', calculateBattery);
   });
 
+  // Mission performance inputs — re-render waypoint list to update leg times
+  ['mission-speed', 'wind-speed', 'wind-dir'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      renderWaypointList();
+      updateMissionEstTime();
+    });
+  });
+
   // Calculate immediately with whatever defaults are in the fields
   calculateBattery();
 }
